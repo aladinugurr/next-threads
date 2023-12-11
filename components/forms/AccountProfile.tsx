@@ -19,6 +19,8 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadThing";
+import { updateUser } from "@/lib/actions/user.actions";
+import { usePathname, useRouter } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -39,8 +41,11 @@ interface Props {
 }
 
 const AccountProfile = ({ user, btnTitle }: Props) => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [files, setFiles] = useState<File[]>([]);
   const { startUpload } = useUploadThing("media");
+
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -85,6 +90,21 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     }
 
     // Todo update user profile
+
+    await updateUser({
+      username: values.username,
+      name: values.name,
+      bio: values.bio,
+      image: values.profile_photo,
+      userId: user.id,
+      path: pathname,
+    });
+
+    if (pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
+    }
   }
 
   return (
@@ -151,7 +171,6 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
             </FormItem>
           )}
         />
-
         <FormField
           name="username"
           control={form.control}
