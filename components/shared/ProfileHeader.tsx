@@ -18,7 +18,7 @@ const ProfileHeader = ({
   bio,
 }: Props) => {
   return (
-    <div className="flex w-full flex-dol justify-start">
+    <div className="flex w-full flex-col justify-start">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Image
@@ -36,11 +36,11 @@ const ProfileHeader = ({
             <p className="text-base-medium text-gray-1">@{username}</p>
           </div>
         </div>
-        {/* TODO community */}
-
-        <p className="mt-6 max-w-lg text-base-regular text-light-2">{bio}</p>
-        <div className="mt-12 h-0.5 w-full bg-dark-3" />
       </div>
+      {/* TODO community */}
+
+      <p className="mt-6 max-w-lg text-base-regular text-light-2">{bio}</p>
+      <div className="mt-12 h-0.5 w-full bg-dark-3" />
     </div>
   );
 };
