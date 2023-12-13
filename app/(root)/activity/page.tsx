@@ -36,7 +36,7 @@ const Page = async () => {
                     <span className="text-sky-500">
                       {activityItem.author.name}
                     </span>
-                    replied to your thread
+                    replied to your thread!
                   </p>
                 </article>
               </Link>
