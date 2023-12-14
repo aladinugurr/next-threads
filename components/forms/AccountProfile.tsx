@@ -92,14 +92,13 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     // Todo update user profile
 
     await updateUser({
-      username: values.username,
       name: values.name,
+      path: pathname,
+      username: values.username,
+      userId: user.id,
       bio: values.bio,
       image: values.profile_photo,
-      userId: user.id,
-      path: pathname,
     });
-
     if (pathname === "/profile/edit") {
       router.back();
     } else {
